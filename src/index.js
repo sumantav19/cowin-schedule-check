@@ -2,35 +2,35 @@ const https = require("https");
 const cron = require("node-cron");
 const player = require("play-sound")();
 const basename = 'https://cdn-api.co-vin.in';
-
-function postRequest(data){
-    return new Promise((resolve)=>{
-        let responseData='';
+/// 
+// function postRequest(data){
+//     return new Promise((resolve)=>{
+//         let responseData='';
         
-        const options = {
-            hostname: basename,
-            path: '/todos',
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Content-Length': data.length
-            }
+//         const options = {
+//             hostname: basename,
+//             path: '/todos',
+//             method: 'POST',
+//             headers: {
+//               'Content-Type': 'application/json',
+//               'Content-Length': data.length
+//             }
     
-        }
-        const req = https.request(options,res=>{
-            res.on('data', d => {
-                 responseData+=d;
-              })
-            res.on('end',()=>{
+//         }
+//         const req = https.request(options,res=>{
+//             res.on('data', d => {
+//                  responseData+=d;
+//               })
+//             res.on('end',()=>{
     
-            })
-        })
-        req.write(data);
-        req.end();
-    })
+//             })
+//         })
+//         req.write(data);
+//         req.end();
+//     })
     
 
-}
+// }
 function getSchedule(date,districtId){
     let data = '';
     https.get(`${basename}/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtId}&date=${date}`,res=>{
@@ -57,7 +57,7 @@ function getSchedule(date,districtId){
 function cronRun(){
     console.log('starting');
     const task = cron.schedule('*/5 * * * * *',() =>{
-        getSchedule('05-05-2021','294');
+        getSchedule('date','districtId');
     });
     task.start();
 }
