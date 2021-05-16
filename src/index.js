@@ -21,7 +21,7 @@ function getSchedule(date, districtId, token) {
         headers: headers
     }
     let data = '';
-    const req = https.request(`${basename}/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${districtId}&date=${date}`, options, res => {
+    const req = https.request(`${basename}/api/v2/appointment/sessions/calendarByDistrict?district_id=${districtId}&date=${date}`, options, res => {
         res.on('data', d => {
             data += d;
         })
