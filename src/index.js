@@ -32,20 +32,27 @@ function getSchedule(date, districtId, token) {
             process.stdout.write("parsing...");
             if (res.statusCode === 200) {
                 data = JSON.parse(data);
+				//console.log(JSON.stringify(data))
+				// && session.vaccine != "COVAXIN"
                 let centers = data.centers;
                 centers.map((center) => {
                     const sessions = center.sessions;
+					const date = new Date();
                     sessions.map(session => {
-                        if (session.min_age_limit > 18 && session.available_capacity > 0) {
-                            console.log(`\n ${center.pincode}   ${session.vaccine} ${center.name} available ${session.available_capacity} ${session.date}`)
-                            player.play('./media/338.mp3', err => {
+                        if (session.min_age_limit == 18 && session.available_capacity > 0 && session.available_capacity_dose1 > 0) {
+                            console.log(`\n ${center.pincode}   ${session.vaccine} ${center.name}   AGE:${session.min_age_limit}   available ${session.available_capacity} ${session.date}  ${center.fee_type}  ${date.getHours()}:${date.getMinutes()}.${date.getSeconds()}`)
+                            player.play('./media/loud-alarm-tone.mp3', err => {
                                 if (err) console.log(`Could not play: ${err}`);
                             })
                         }
                     })
 
                 })
-            } else { console.log(`response status is ${res.statusCode}, please update the token and rerun`) }
+            } else { console.log(`response status is ${res.statusCode}, please update the token and rerun`)
+					player.play('./media/Smoke Alarm.mp3', err => {
+                                if (err) console.log(`Could not play: ${err}`);
+                            })
+				}
         })
         req.on('error', (e) => {
             console.log("Error in request>>>>>", e);
@@ -57,7 +64,7 @@ function getSchedule(date, districtId, token) {
 function cronRun(date, districtId, token) {
     console.log(`starting for ${date} ${districtId} ${token}`);
 
-    const task = cron.schedule('*/20 * * * * *', () => {
+    const task = cron.schedule('*/10 * * * * *', () => {
         getSchedule(date, districtId, token);
     });
     task.start();
