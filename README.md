@@ -2,6 +2,7 @@
 - Install Node
 - Open Command prompt or Terminal, Git clone the repo
 - Run inside the folder```npm install```
+- Run inside the folder```npm i --save date-and-time```
 - Refer this blog to install [Audio player](https://thisdavej.com/node-js-playing-sounds-to-provide-notifications/)
     * Keep in mind for windows <b> MPlayer </b> is required  
 - Run inside the folder ```node . <districtId> <week count> <Token>```
@@ -13,6 +14,6 @@
 - Schedule runs depends on cron syntax
 - Test the audio player
 - Get the District id from cowin websit
-- Date format ```dd-mm-yyyy```
+- Date format ```dd-mm-yyyy``` (This input is not required at the moment)
 - Token is not mandatory
 - There is a change in api call. There could be a lag of 30 mins to get the latest data
