@@ -42,6 +42,7 @@ function getSchedule(date, districtId, token) {
                 let centers = data.centers;
                 centers.map((center) => {
                     const sessions = center.sessions;
+					const date = new Date();
                     sessions.map(session => {
                         if (session.min_age_limit == 18 && session.available_capacity > 0 && session.available_capacity_dose1 > 0) {
                             console.log(`\n ${center.pincode}   ${session.vaccine} ${center.name}   AGE:${session.min_age_limit}   available:${session.available_capacity}   1st dose:${session.available_capacity_dose1} 2nd dose:${session.available_capacity_dose2} ${session.date}  ${center.fee_type}  ${dateCurr.getHours()}:${dateCurr.getMinutes()}.${dateCurr.getSeconds()}`)
