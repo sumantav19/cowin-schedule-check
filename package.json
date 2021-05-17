@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "date-and-time": "^1.0.0",
     "node-cron": "^3.0.0",
     "play-sound": "^1.1.3"
   }
